@@ -3,97 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Calculator</title>
+    <title>Retro Calculator</title>
     <style>
-        /* Styles for the body element */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap'); /* Import Inter font */
+
         body {
-            font-family: 'Arial', sans-serif; /* Sets the font family */
-            display: flex; /* Use flexbox for centering */
-            justify-content: center; /* Center horizontally */
-            align-items: center; /* Center vertically */
-            height: 100vh; /* Full viewport height */
-            margin: 0; /* Remove default margin */
-            background: #f0f0f0; /* Light gray background */
+            font-family: 'Inter', sans-serif; /* Use Inter font */
+            font-weight: bold; /* Bold font */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: #000000; /* Black background */
         }
-        /* Styles for the calculator container */
         .calculator {
-            background: #fff; /* White background */
-            padding: 20px; /* Padding around the calculator */
-            border-radius: 10px; /* Rounded corners */
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+            background: #333333; /* Dark background for calculator */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5); /* Fluorescent white shadow */
+            border: 2px solid #666; /* Border to simulate a mechanical frame */
         }
-        /* Styles for the display div */
         .display {
-            width: 100%; /* Full width */
-            height: 60px; /* Fixed height */
-            text-align: right; /* Right align text */
-            margin-bottom: 20px; /* Space below the display */
-            padding: 10px; /* Padding inside the display */
-            font-size: 2em; /* Larger font size */
-            border: 1px solid #ddd; /* Light border */
-            border-radius: 5px; /* Rounded corners */
-            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1); /* Inner shadow for depth */
-            overflow: hidden; /* Hide overflow */
-            white-space: nowrap; /* Prevent text wrapping */
+            width: 100%;
+            height: 60px;
+            text-align: right;
+            margin-bottom: 20px;
+            padding: 10px;
+            font-size: 2em;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.5); /* Fluorescent white inner shadow */
+            background: #000000; /* Black background for display */
+            color: #00ff00; /* Fluorescent green text */
+            overflow: hidden;
+            white-space: nowrap;
         }
-        /* Styles for the buttons container */
         .buttons {
-            display: grid; /* Use CSS grid for layout */
-            grid-template-columns: repeat(4, 1fr); /* Four equal columns */
-            gap: 10px; /* Space between buttons */
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
         }
-        /* Styles for individual buttons */
         .button {
-            padding: 20px; /* Padding inside buttons */
-            font-size: 1.5em; /* Larger font size */
-            border: none; /* Remove default border */
-            border-radius: 5px; /* Rounded corners */
-            cursor: pointer; /* Pointer cursor on hover */
-            background-color: #007bff; /* Blue background */
-            color: white; /* White text color */
-            transition: background-color 0.3s; /* Smooth background color transition */
+            padding: 20px;
+            font-size: 1.5em;
+            font-weight: bold; /* Bold font */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.1s;
+            color: white; /* White text color for buttons */
+            box-shadow: 0 5px #666; /* Simulate raised keycap */
         }
-        /* Styles for operator buttons */
+        .button.main {
+            background-color: #ff6600; /* Orange background for main buttons */
+        }
         .button.operator {
-            background-color: #28a745; /* Green background for operators */
+            background-color: #000000; /* Black background for operator buttons */
         }
-        /* Styles for clear button */
         .button.clear {
-            background-color: #dc3545; /* Red background for clear button */
+            background-color: white; /* White background for clear button */
+            color: #ff6600; /* Orange text color for clear button */
         }
-        /* Active state for buttons */
         .button:active {
-            background-color: #0056b3; /* Darker blue on click */
-        }
-        .button.operator:active {
-            background-color: #1e7e34; /* Darker green on click */
-        }
-        .button.clear:active {
-            background-color: #c82333; /* Darker red on click */
+            box-shadow: 0 2px #666; /* Simulate pressed keycap */
+            transform: translateY(3px); /* Move keycap down */
         }
     </style>
 </head>
 <body>
     <div class="calculator">
-        <!-- Contenteditable div for the display -->
         <div class="display" id="display" contenteditable="true"></div>
         <div class="buttons">
-            <!-- Calculator buttons with data-key attributes for identification -->
-            <button class="button" data-key="7">7</button>
-            <button class="button" data-key="8">8</button>
-            <button class="button" data-key="9">9</button>
+            <button class="button main" data-key="7">7</button>
+            <button class="button main" data-key="8">8</button>
+            <button class="button main" data-key="9">9</button>
             <button class="button operator" data-key="/">/</button>
-            <button class="button" data-key="4">4</button>
-            <button class="button" data-key="5">5</button>
-            <button class="button" data-key="6">6</button>
+            <button class="button main" data-key="4">4</button>
+            <button class="button main" data-key="5">5</button>
+            <button class="button main" data-key="6">6</button>
             <button class="button operator" data-key="*">*</button>
-            <button class="button" data-key="1">1</button>
-            <button class="button" data-key="2">2</button>
-            <button class="button" data-key="3">3</button>
+            <button class="button main" data-key="1">1</button>
+            <button class="button main" data-key="2">2</button>
+            <button class="button main" data-key="3">3</button>
             <button class="button operator" data-key="-">-</button>
-            <button class="button" data-key="0">0</button>
-            <button class="button" data-key=".">.</button>
-            <button class="button" data-key="=">=</button>
+            <button class="button main" data-key="0">0</button>
+            <button class="button main" data-key=".">.</button>
+            <button class="button operator" data-key="=">=</button>
             <button class="button operator" data-key="+">+</button>
             <button class="button clear" data-key="C">C</button>
         </div>
@@ -113,77 +109,82 @@
 
         // Add a keydown event listener to the document
         document.addEventListener('keydown', (event) => {
-    if ((event.key >= '0' && event.key <= '9') || ['+', '-', '*', '/', '.', 'Enter', 'Backspace', 'ArrowLeft', 'ArrowRight'].includes(event.key)) {
-        event.preventDefault();
-        handleInput(event.key === 'Enter' ? '=' : event.key);
-    }
-});
+            if ((event.key >= '0' && event.key <= '9') || ['+', '-', '*', '/', '.', 'Enter', 'Backspace', 'ArrowLeft', 'ArrowRight'].includes(event.key)) {
+                event.preventDefault();
+                handleInput(event.key === 'Enter' ? '=' : event.key);
+            }
+        });
 
-function handleInput(input) {
-    if (input === 'C') {
-        clearDisplay(); // Clear display if 'C' is pressed
-    } else if (input === '=') {
-        calculate(); // Calculate result if '=' is pressed
-    } else if (input === 'Backspace') {
-        deleteLastCharacter(); // Delete last character if 'Backspace' is pressed
-    } else if (['ArrowLeft', 'ArrowRight'].includes(input)) {
-        moveCursor(input); // Move cursor if arrow keys are pressed
-    } else {
-        appendToDisplay(input); // Append input to display
-    }
-}
+        // Function to handle input
+        function handleInput(input) {
+            if (input === 'C') {
+                clearDisplay(); // Clear display if 'C' is pressed
+            } else if (input === '=') {
+                calculate(); // Calculate result if '=' is pressed
+            } else if (input === 'Backspace') {
+                deleteLastCharacter(); // Delete last character if 'Backspace' is pressed
+            } else if (['ArrowLeft', 'ArrowRight'].includes(input)) {
+                moveCursor(input); // Move cursor if arrow keys are pressed
+            } else {
+                appendToDisplay(input); // Append input to display
+            }
+        }
 
-function appendToDisplay(value) {
-    const selection = window.getSelection();
-    const range = selection.getRangeAt(0);
+        // Function to append value to display
+        function appendToDisplay(value) {
+            const selection = window.getSelection();
+            const range = selection.getRangeAt(0);
 
-    if (range.startContainer === display) {
-        range.deleteContents(); // Clear current selection
-        const textNode = document.createTextNode(value);
-        range.insertNode(textNode); // Insert new content
-        range.setStartAfter(textNode);
-        range.setEndAfter(textNode);
-        selection.removeAllRanges();
-        selection.addRange(range);
-    }
-}
+            if (range.startContainer === display) {
+                range.deleteContents(); // Clear current selection
+                const textNode = document.createTextNode(value);
+                range.insertNode(textNode); // Insert new content
+                range.setStartAfter(textNode);
+                range.setEndAfter(textNode);
+                selection.removeAllRanges();
+                selection.addRange(range);
+            }
+        }
 
-function calculate() {
-    try {
-        display.textContent = eval(display.textContent.replace(/×/g, '*').replace(/÷/g, '/'));
-    } catch (error) {
-        display.textContent = 'Error'; // Show error if calculation fails
-    }
-}
+        // Function to calculate the result
+        function calculate() {
+            try {
+                display.textContent = eval(display.textContent.replace(/×/g, '*').replace(/÷/g, '/'));
+            } catch (error) {
+                display.textContent = 'Error'; // Show error if calculation fails
+            }
+        }
 
-function clearDisplay() {
-    display.textContent = '';
-}
+        // Function to clear the display
+        function clearDisplay() {
+            display.textContent = '';
+        }
 
-function deleteLastCharacter() {
-    const selection = window.getSelection();
-    const range = selection.getRangeAt(0);
-    if (range.startOffset === 0 && range.endOffset === 0) {
-        return;
-    }
-    range.setStart(range.startContainer, range.startOffset - 1);
-    range.deleteContents(); // Delete the last character
-}
+        // Function to delete the last character
+        function deleteLastCharacter() {
+            const selection = window.getSelection();
+            const range = selection.getRangeAt(0);
+            if (range.startOffset === 0 && range.endOffset === 0) {
+                return;
+            }
+            range.setStart(range.startContainer, range.startOffset - 1);
+            range.deleteContents(); // Delete the last character
+        }
 
-function moveCursor(direction) {
-    const selection = window.getSelection();
-    const range = selection.getRangeAt(0);
-    if (direction === 'ArrowLeft' && range.startOffset > 0) {
-        range.setStart(range.startContainer, range.startOffset - 1);
-        range.setEnd(range.startContainer, range.startOffset);
-    } else if (direction === 'ArrowRight' && range.endOffset < display.textContent.length) {
-        range.setStart(range.startContainer, range.startOffset + 1);
-        range.setEnd(range.startContainer, range.startOffset);
-    }
-    selection.removeAllRanges();
-    selection.addRange(range);
-}
-
+        // Function to move the cursor
+        function moveCursor(direction) {
+            const selection = window.getSelection();
+            const range = selection.getRangeAt(0);
+            if (direction === 'ArrowLeft' && range.startOffset > 0) {
+                range.setStart(range.startContainer, range.startOffset - 1);
+                range.setEnd(range.startContainer, range.startOffset);
+            } else if (direction === 'ArrowRight' && range.endOffset < display.textContent.length) {
+                range.setStart(range.startContainer, range.startOffset + 1);
+                range.setEnd(range.startContainer, range.startOffset);
+            }
+            selection.removeAllRanges();
+            selection.addRange(range);
+        }
     </script>
 </body>
 </html>
